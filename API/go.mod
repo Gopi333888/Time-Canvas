@@ -1,11 +1,11 @@
 module WatchHive
 
-go 1.21.5
+go 1.22.1
 
 require (
 	github.com/360EntSecGroup-Skylar/excelize v1.4.1
 	github.com/DATA-DOG/go-sqlmock v1.5.2
-	github.com/aws/aws-sdk-go v1.51.0
+	github.com/aws/aws-sdk-go v1.51.1
 	github.com/gin-gonic/gin v1.9.1
 	github.com/go-playground/validator/v10 v10.19.0
 	github.com/golang-jwt/jwt v3.2.2+incompatible

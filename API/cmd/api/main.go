@@ -3,6 +3,7 @@ package main
 import (
 	"WatchHive/pkg/config"
 	"WatchHive/pkg/di"
+	"fmt"
 	"log"
 
 	_ "WatchHive/cmd/api/docs"
@@ -32,10 +33,14 @@ func main() {
 	if Err != nil {
 		log.Fatal("cannot load config : ", Err)
 	}
+	fmt.Println("before server")
 	server, diErr := di.InitializeAPI(config)
+	fmt.Println("After server")
 	if diErr != nil {
 		log.Fatal("cannot start server: ", diErr)
 	} else {
+		fmt.Println("Inside else")
 		server.Start()
+		fmt.Println("Start")
 	}
 }
