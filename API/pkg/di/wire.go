@@ -1,4 +1,3 @@
-
 package di
 
 // import (
@@ -29,6 +28,7 @@ package di
 // 		repository.NewWalletRepository,
 // 		repository.NewOfferRepository,
 // 		repository.NewCouponRepository,
+// 		repository.NewWishListRepository,
 
 // 		usecase.NewUserUseCase,
 // 		usecase.NewAdminUseCase,
@@ -41,6 +41,7 @@ package di
 // 		usecase.NewWalletUsecase,
 // 		usecase.NewOferUsecase,
 // 		usecase.NewCouponUsecase,
+// 		usecase.NewWishListUsecase,
 
 // 		handler.NewUserHandler,
 // 		handler.NewAdminHandler,
@@ -53,6 +54,7 @@ package di
 // 		handler.NewWalletHandler,
 // 		handler.NewOfferHandler,
 // 		handler.NewCouponHandler,
+// 		handler.NewWishListHandler,
 
 // 		helper.NewHelper,
 

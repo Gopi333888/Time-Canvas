@@ -2489,6 +2489,124 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/wishlist": {
+            "get": {
+                "security": [
+                    {
+                        "BearerTokenAuth": []
+                    }
+                ],
+                "description": "Retrieves the user's wishlist.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Wishlist Management"
+                ],
+                "summary": "Retrieve Wishlist",
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved wishlist",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request format or constraints not satisfied",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerTokenAuth": []
+                    }
+                ],
+                "description": "Add a product to the user's wishlist.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Wishlist Management"
+                ],
+                "summary": "Add to Wishlist",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Product ID",
+                        "name": "product_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully added to wishlist",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request format or constraints not satisfied",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerTokenAuth": []
+                    }
+                ],
+                "description": "Removes a product from the user's wishlist.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Wishlist Management"
+                ],
+                "summary": "Remove from Wishlist",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Product ID",
+                        "name": "product_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully removed from wishlist",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request format or constraints not satisfied",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {

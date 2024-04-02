@@ -26,6 +26,7 @@ func NewServerHTTP(adminHandler *handler.AdminHandler,
 	paymentHandler *handler.PaymentHandler,
 	walletHandler *handler.WalletHandler,
 	offerHandler *handler.OfferHandler,
+	wishListhandler *handler.WishListhandler,
 	couponHandler *handler.CouponHandler) *ServerHTTP {
 	engine := gin.New()
 
@@ -38,7 +39,8 @@ func NewServerHTTP(adminHandler *handler.AdminHandler,
 		userHandler, otpHandler,
 		productHandler, cartHandler,
 		orderHandler, paymentHandler,
-		walletHandler, couponHandler)
+		walletHandler, couponHandler,
+		wishListhandler)
 
 	routes.AdminRoutes(engine.Group("/admin"),
 		adminHandler, catgoryHandler,

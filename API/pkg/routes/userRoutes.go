@@ -15,7 +15,8 @@ func UserRoutes(engine *gin.RouterGroup,
 	orderHandler *handler.OrderHandler,
 	paymentHandler *handler.PaymentHandler,
 	walletHandler *handler.WalletHandler,
-	couponHandler *handler.CouponHandler) {
+	couponHandler *handler.CouponHandler,
+	wishListHandler *handler.WishListhandler) {
 
 	engine.POST("/signup", userHandler.UserSignUp)
 	engine.POST("/login", userHandler.LoginHandler)
@@ -57,11 +58,17 @@ func UserRoutes(engine *gin.RouterGroup,
 
 		{
 			wallet.GET("", walletHandler.GetWallet)
-			wallet.GET("/history",walletHandler.GetWalletHistory)
+			wallet.GET("/history", walletHandler.GetWalletHistory)
 		}
 		coupon := engine.Group("/coupon")
 		{
 			coupon.GET("", couponHandler.GetCouponUser)
+		}
+		wishList := engine.Group("/wishlist")
+		{
+			wishList.POST("", wishListHandler.AddToWishList)
+			wishList.GET("", wishListHandler.GetWishlist)
+			wishList.DELETE("", wishListHandler.RemoveFromWishlist)
 		}
 
 	}

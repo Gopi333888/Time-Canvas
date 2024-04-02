@@ -1,23 +1,44 @@
 package repository
 
-// import (
-// 	interfaces "WatchHive/pkg/repository/interface"
-// 	"errors"
+import (
+	interfaces "WatchHive/pkg/repository/interface"
+	"WatchHive/pkg/utils/models"
 
-// 	"gorm.io/gorm"
-// )
+	"gorm.io/gorm"
+)
 
-// type wishListRepository struct {
-// 	DB *gorm.DB
-// }
+type wishListRepository struct {
+	DB *gorm.DB
+}
 
-// func NewWishListRepository(DB *gorm.DB) interfaces.WishListRepository {
-// 	return &wishListRepository{
-// 		DB: DB,
-// 	}
-// }
+func NewWishListRepository(DB *gorm.DB) interfaces.WishListRepository {
+	return &wishListRepository{
+		DB: DB,
+	}
+}
 
-// func (wr *wishListRepository) AddToWishList(user_id, product_id int) error {
+func (wr *wishListRepository) AddToWishList(user_id, product_id int) error {
+	querry := `insert into wishlists (product_id,user_id) values (?,?)`
+	if err := wr.DB.Exec(querry, user_id, product_id).Error; err != nil {
+		return err
+	}
+	return nil
 
+}
+func (wr *wishListRepository) GetWishList(user_id int) ([]models.WishListData, error) {
+	var wishlist []models.WishListData
+	querry := `select * from wishlists where user_id = ?`
+	if err := wr.DB.Raw(querry, user_id).Scan(&wishlist).Error; err != nil {
+		return []models.WishListData{}, err
+	}
+	return wishlist, nil
 
-// }
+}
+func (wr *wishListRepository) RemoveFromWishlist(user_id, product_id int) error {
+	querry := `delete from wishlists where user_id = ? and product_id = ?`
+	if err := wr.DB.Exec(querry, user_id, product_id).Error; err != nil {
+		return err
+	}
+	return nil
+
+}
