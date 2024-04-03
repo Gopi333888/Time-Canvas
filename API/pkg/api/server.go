@@ -3,7 +3,6 @@ package http
 import (
 	"WatchHive/pkg/api/handler"
 	"WatchHive/pkg/routes"
-	"fmt"
 	"log"
 
 	"github.com/gin-gonic/gin"
@@ -47,7 +46,7 @@ func NewServerHTTP(adminHandler *handler.AdminHandler,
 		productHandler, paymentHandler,
 		orderHandler, offerHandler,
 		couponHandler)
-	fmt.Println("Before returning server at http")
+
 	return &ServerHTTP{engine: engine}
 
 }

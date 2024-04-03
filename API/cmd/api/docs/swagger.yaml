@@ -1802,7 +1802,7 @@ paths:
       summary: Get wallet history
       tags:
       - User Wallet Management
-  /wishlist:
+  /user/wishlist:
     delete:
       consumes:
       - application/json

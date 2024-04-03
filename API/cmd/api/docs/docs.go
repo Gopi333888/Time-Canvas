@@ -2490,7 +2490,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/wishlist": {
+        "/user/wishlist": {
             "get": {
                 "security": [
                     {

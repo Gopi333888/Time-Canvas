@@ -77,7 +77,7 @@ const ErrCouponExistFalse = "given coupon is not available"
 const ErrUserAdmin = "entered email is belongs to admin"
 const ErrDateExpired = "date expired"
 const ErrGetUserId = "getting user id is failed"
-
+const ErrAlreadyAdded = "already added"
 const StatusApprove = "approved"
 
 // Message strings

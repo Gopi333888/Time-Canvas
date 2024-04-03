@@ -19,7 +19,18 @@ func NewWishListUsecase(wl repo.WishListRepository) interfaces.WishListUsecase {
 }
 
 func (wu *wishListUsecase) AddToWishList(user_id, product_id int) error {
-	err := wu.wishlist.AddToWishList(user_id, product_id)
+
+	ok, err := wu.wishlist.IsExistOnWishlist(user_id, product_id)
+
+	if err != nil {
+		return errors.New(errmsg.ErrGetData)
+	}
+
+	if ok {
+		return errors.New(errmsg.ErrAlreadyAdded)
+	}
+
+	err = wu.wishlist.AddToWishList(user_id, product_id)
 	if err != nil {
 		return errors.New(errmsg.ErrWriteDB)
 	}
@@ -35,7 +46,18 @@ func (wu *wishListUsecase) GetWishList(user_id int) ([]models.WishListData, erro
 }
 
 func (wu *wishListUsecase) RemoveFromWishlist(user_id, product_id int) error {
-	err := wu.wishlist.RemoveFromWishlist(user_id, product_id)
+
+	ok, err := wu.wishlist.IsExistOnWishlist(user_id, product_id)
+
+	if err != nil {
+		return errors.New(errmsg.ErrGetData)
+	}
+
+	if !ok {
+		return errors.New(errmsg.ErrNotExist)
+	}
+
+	err = wu.wishlist.RemoveFromWishlist(user_id, product_id)
 	if err != nil {
 		return errors.New(errmsg.ErrInternal)
 	}

@@ -2482,7 +2482,7 @@
                 }
             }
         },
-        "/wishlist": {
+        "/user/wishlist": {
             "get": {
                 "security": [
                     {

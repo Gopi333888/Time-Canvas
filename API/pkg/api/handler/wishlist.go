@@ -5,6 +5,7 @@ import (
 	"WatchHive/pkg/utils/errmsg"
 	"WatchHive/pkg/utils/response"
 	"errors"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -31,7 +32,7 @@ func NewWishListHandler(usecase interfaces.WishListUsecase) *WishListhandler {
 // @Param product_id query int true "Product ID" Format(int64)
 // @Success 200 {object} response.Response "Successfully added to wishlist"
 // @Failure 400 {object} response.Response "Invalid request format or constraints not satisfied"
-// @Router /wishlist [post]
+// @Router /user/wishlist [post]
 func (wh *WishListhandler) AddToWishList(c *gin.Context) {
 
 	id, ok := c.Get("id")
@@ -69,7 +70,7 @@ func (wh *WishListhandler) AddToWishList(c *gin.Context) {
 // @Tags User Wishlist Management
 // @Success 200 {object} response.Response "Successfully retrieved wishlist"
 // @Failure 400 {object} response.Response "Invalid request format or constraints not satisfied"
-// @Router /wishlist [get]
+// @Router /user/wishlist [get]
 func (wh *WishListhandler) GetWishlist(c *gin.Context) {
 	id, ok := c.Get("id")
 	if !ok {
@@ -80,13 +81,15 @@ func (wh *WishListhandler) GetWishlist(c *gin.Context) {
 	iD := id.(int)
 	wishlistData, err := wh.WishListUsecase.GetWishList(iD)
 
+	fmt.Println("wishlist", wishlistData)
+
 	if err != nil {
 		errResp := response.ClientResponse(http.StatusBadRequest, errmsg.MsgGetErr, nil, err.Error())
 		c.JSON(http.StatusBadRequest, errResp)
 		return
 	}
 
-	successResp := response.ClientResponse(http.StatusOK, errmsg.MsgAddSuccess, wishlistData, nil)
+	successResp := response.ClientResponse(http.StatusOK, errmsg.MsgSuccess, wishlistData, nil)
 	c.JSON(http.StatusOK, successResp)
 }
 
@@ -100,7 +103,7 @@ func (wh *WishListhandler) GetWishlist(c *gin.Context) {
 // @Param product_id query int true "Product ID" Format(int64)
 // @Success 200 {object} response.Response "Successfully removed from wishlist"
 // @Failure 400 {object} response.Response "Invalid request format or constraints not satisfied"
-// @Router /wishlist [delete]
+// @Router /user/wishlist [delete]
 func (wh *WishListhandler) RemoveFromWishlist(c *gin.Context) {
 	id, ok := c.Get("id")
 	if !ok {
